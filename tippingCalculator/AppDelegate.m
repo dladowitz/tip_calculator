@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "TipViewController.h"
+#import <Tapjoy/Tapjoy.h>
 
 @implementation AppDelegate
 
@@ -15,6 +16,24 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    //Setting up Tapjoy SDK
+    [Tapjoy requestTapjoyConnect:@"0c754ca1-eb4d-4edc-b3a9-f4841b546e27"
+                       secretKey:@"Need to add in secret key. DONT PUSH TO GITHUB"
+                         options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) }
+     // If you are not using Tapjoy Managed currency, you would set your own user ID here.
+     //TJC_OPTION_USER_ID : @"A_UNIQUE_USER_ID"
+     ];
+    
+    // Tapjoy Connect Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(tjcConnectSuccess:)
+                                                 name:TJC_CONNECT_SUCCESS
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(tjcConnectFail:)
+                                                 name:TJC_CONNECT_FAILED
+                                               object:nil];
     
     TipViewController *vc = [[TipViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
@@ -51,6 +70,17 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void)tjcConnectSuccess:(NSNotification*)notifyObj
+{
+	NSLog(@"Tapjoy connect Succeeded");
+}
+
+
+- (void)tjcConnectFail:(NSNotification*)notifyObj
+{
+	NSLog(@"Tapjoy connect Failed");
 }
 
 @end

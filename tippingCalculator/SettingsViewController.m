@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import <Tapjoy/Tapjoy.h>
 
 @interface SettingsViewController ()
 
@@ -34,6 +35,7 @@
     
     //sets the segement index to the current default
     self.defaultTipControl.selectedSegmentIndex = [self getSegmentIndex];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,8 +56,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self saveDefaults];
-}
+    [self saveDefaults];}
 
 //pull tip amount from defaults and converts to a segement index
 -(int)getSegmentIndex {

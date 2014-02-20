@@ -8,6 +8,7 @@
 
 #import "TipViewController.h"
 #import "SettingsViewController.h"
+#import <Tapjoy/Tapjoy.h>
 
 
 @interface TipViewController ()
@@ -38,9 +39,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(showFullScreenAd:)
+												 name:TJC_FULL_SCREEN_AD_RESPONSE_NOTIFICATION
+											   object:nil];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
     [self setSegementControl];
     [self updateValues];
+ 
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,5 +105,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self setSegementControl];
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [Tapjoy showOffers];
+//    [Tapjoy showOffersWithViewController:self];
+//    [Tapjoy getFul
+//    [Tapjoy showFullScreenAdWithViewController:self];
+}
+
+- (void)showFullScreenAd:(NSNotification*)notification
+{
+	[Tapjoy showFullScreenAdWithViewController:self];
+}
+
 
 @end
