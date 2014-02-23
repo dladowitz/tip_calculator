@@ -10,5 +10,8 @@
 
 @interface SettingsViewController : UIViewController
 
+- (int)getTaxSegmentIndex;
+- (int)getTipSegmentIndex;
+- (float)getDefaultTaxRate;
 
 @end

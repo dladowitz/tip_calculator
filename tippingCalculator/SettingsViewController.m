@@ -12,9 +12,16 @@
 @interface SettingsViewController ()
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *defaultTipControl;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *defaultTaxControl;
+@property (weak, nonatomic) IBOutlet UILabel *taxRateLabel;
+@property (weak, nonatomic) IBOutlet UISlider *defaultTaxRateControl;
+
 
 - (void)saveDefaults;
-- (int)getSegmentIndex;
+- (int)getTipSegmentIndex;
+- (int)getTaxSegmentIndex;
+- (float)getDefaultTaxRate;
+- (IBAction)sliderMoved:(UISlider *)slider;
 
 @end
 
@@ -38,10 +45,12 @@
 												 name:TJC_FULL_SCREEN_AD_RESPONSE_NOTIFICATION
 											   object:nil];
     
-    [Tapjoy getFullScreenAd];
+//    [Tapjoy getFullScreenAd];
     
     //sets the segement index to the current default
-    self.defaultTipControl.selectedSegmentIndex = [self getSegmentIndex];
+    self.defaultTipControl.selectedSegmentIndex = [self getTipSegmentIndex];
+    self.defaultTaxControl.selectedSegmentIndex = [self getTaxSegmentIndex];
+    self.defaultTaxRateControl.value = [self getDefaultTaxRate] / 100;
     
 }
 
@@ -53,12 +62,16 @@
 
 
 - (void)saveDefaults {
-    NSArray *defaultTipValues = @[@(0.10), @(0.15), @(0.2)];
+    NSArray *defaultTipValues = @[@(0.1), @(0.12), @(0.14), @(0.16), @(0.18), @(0.2)];
     float defaultTipPercent = [defaultTipValues[self.defaultTipControl.selectedSegmentIndex] floatValue];
+    int defaultTaxSetting = self.defaultTaxControl.selectedSegmentIndex;
+    float defaultTaxRate = [self.taxRateLabel.text floatValue];
     
     //Used twice. Should DRY this up by making an instance variable
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setFloat: defaultTipPercent forKey:@"defaultTipAmount"];
+    [defaults setInteger: defaultTaxSetting forKey:@"defaultTaxSetting"];
+    [defaults setFloat: defaultTaxRate forKey:@"defaultTaxRate"];
     [defaults synchronize];
 }
 
@@ -66,19 +79,64 @@
     [self saveDefaults];}
 
 //pull tip amount from defaults and converts to a segement index
--(int)getSegmentIndex {
+- (int)getTipSegmentIndex {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     float defaultTipAmount = [defaults floatForKey:@"defaultTipAmount"];
     
     //There is some funny rounding math going on
+    //Also should research a case statement or something better
     if(defaultTipAmount < 0.11) {
         return 0;
-    } else if(defaultTipAmount < 0.151) {
+    } else if(defaultTipAmount < 0.13) {
         return 1;
-    } else {
+    } else if(defaultTipAmount < 0.15) {
         return 2;
+    } else if(defaultTipAmount < 0.17) {
+        return 3;
+    } else if(defaultTipAmount < 0.19) {
+        return 4;
+    } else {
+        return 5;
     }
 }
+
+- (int)getTaxSegmentIndex {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int defaultTaxSetting = [defaults integerForKey:@"defaultTaxSetting"];
+    
+        if(defaultTaxSetting == 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+}
+
+- (float)getDefaultTaxRate {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    float defaultTaxRate = [defaults floatForKey:@"defaultTaxRate"];
+    
+    //Doing this so to add a '%' symbol on the end. Probably a better way
+    NSString *defaultTaxRateString = [NSString stringWithFormat:@"%0.2f", defaultTaxRate];
+    self.taxRateLabel.text = [defaultTaxRateString stringByAppendingString:@"%"];
+    return defaultTaxRate;
+}
+
+- (IBAction)sliderMoved:(UISlider *)slider
+{
+    //Get the slider value from screen
+    //Round to the nearest .05 cause the slider is hard to control
+    float sliderValue = floor((slider.value * 100) / 0.05);
+    float roundedValue = sliderValue * 0.05;
+    
+    NSString *defaultTaxRate = [NSString stringWithFormat:@"%0.2f", roundedValue];
+    self.taxRateLabel.text = [defaultTaxRate stringByAppendingString:@"%"];
+}
+
+//- (float) customRounding(float value) {
+//    const float roundingValue = 0.05;
+//    int mulitpler = floor(value / roundingValue);
+//    return mulitpler * roundingValue;
+//}
 
 - (void)showFullScreenAd:(NSNotification*)notification
 {
