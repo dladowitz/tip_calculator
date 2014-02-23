@@ -33,6 +33,13 @@
 {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(showFullScreenAd:)
+												 name:TJC_FULL_SCREEN_AD_RESPONSE_NOTIFICATION
+											   object:nil];
+    
+    [Tapjoy getFullScreenAd];
+    
     //sets the segement index to the current default
     self.defaultTipControl.selectedSegmentIndex = [self getSegmentIndex];
     
@@ -72,5 +79,11 @@
         return 2;
     }
 }
+
+- (void)showFullScreenAd:(NSNotification*)notification
+{
+	[Tapjoy showFullScreenAdWithViewController:[self navigationController]];
+}
+
 
 @end

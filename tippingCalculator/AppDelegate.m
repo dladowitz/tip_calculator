@@ -19,7 +19,7 @@
     
     //Setting up Tapjoy SDK
     [Tapjoy requestTapjoyConnect:@"0c754ca1-eb4d-4edc-b3a9-f4841b546e27"
-                       secretKey:@"Need to add in secret key. DONT PUSH TO GITHUB"
+                       secretKey:@"Seems like the secret key was only used for initially enabling the app"
                          options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) }
      // If you are not using Tapjoy Managed currency, you would set your own user ID here.
      //TJC_OPTION_USER_ID : @"A_UNIQUE_USER_ID"

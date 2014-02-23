@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *billTextFeild;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numOfPeople;
+@property (weak, nonatomic) IBOutlet UILabel *perPerson;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipControl;
 
 - (IBAction)onTap:(id)sender;
@@ -40,16 +42,10 @@
 {
     [super viewDidLoad];
     
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(showFullScreenAd:)
-												 name:TJC_FULL_SCREEN_AD_RESPONSE_NOTIFICATION
-											   object:nil];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Games" style:UIBarButtonItemStylePlain target:self action:@selector(onGamesButton)];
     [self setSegementControl];
     [self updateValues];
- 
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,20 +64,33 @@
     float billAmount = [self.billTextFeild.text floatValue];
     
     NSArray *tipValues = @[@(0.1), @(0.15), @(0.2)];
+    
     //Getting tipControl setting from screen
     float tipPercent = [tipValues[self.tipControl.selectedSegmentIndex] floatValue];
 
+    //Do some math
     float tipAmount = billAmount * tipPercent;
     float totalAmount = tipAmount + billAmount;
+    float eachPersonTotal = totalAmount / [self.numOfPeople.text floatValue];
     
-    //seting tip and total amounts back to sceen
+    //seting tip, grand total, and per person amounts back to sceen
     self.tipLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
     self.totalLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
-   
+    self.perPerson.text = [NSString stringWithFormat:@"$%0.2f", eachPersonTotal];
 }
+
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+//{
+//    self.tipLabel.text = self.billTextFeild.text;
+//    return YES;
+//}
 
 - (void)onSettingsButton {
     [self.navigationController pushViewController:[[SettingsViewController alloc] init] animated:YES];
+}
+
+- (void)onGamesButton {
+    [Tapjoy showOffersWithCurrencyID:@"9753751e-ab4a-46bf-9007-338ff91b3873" withCurrencySelector:NO];
 }
 
 //This logic is used in SettingsViewController as well. Need to learn how to
@@ -102,21 +111,16 @@
     }
 }
 
+- (IBAction)sliderMoved:(UISlider *)slider
+{
+    //Get the slider value from screen. Run update values.
+    NSLog(@"The value of the slider is %i", (int) slider.value);
+    self.numOfPeople.text = [NSString stringWithFormat:@"%i", (int) slider.value];
+    [self updateValues];
+    
+}
 - (void)viewWillAppear:(BOOL)animated {
     [self setSegementControl];
 }
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [Tapjoy showOffers];
-//    [Tapjoy showOffersWithViewController:self];
-//    [Tapjoy getFul
-//    [Tapjoy showFullScreenAdWithViewController:self];
-}
-
-- (void)showFullScreenAd:(NSNotification*)notification
-{
-	[Tapjoy showFullScreenAdWithViewController:self];
-}
-
 
 @end
