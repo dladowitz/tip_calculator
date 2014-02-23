@@ -23,6 +23,7 @@
 - (IBAction)onTap:(id)sender;
 - (void)updateValues;
 - (void)setSegementControl;
+- (IBAction)sliderMoved:(UISlider *)slider;
 
 @end
 
@@ -42,6 +43,14 @@
 {
     [super viewDidLoad];
     
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    
+    [notificationCenter addObserver:self
+                           selector:@selector (textFieldText:)
+                               name:UITextFieldTextDidChangeNotification
+                             object:_billTextFeild];
+    
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Games" style:UIBarButtonItemStylePlain target:self action:@selector(onGamesButton)];
     [self setSegementControl];
@@ -54,15 +63,24 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void) textFieldText:(id)notification {
+    NSLog(@"textField changed");
+    [self updateValues];
+}
+
+
 - (IBAction)onTap:(id)sender {
     [self.view endEditing:YES];
     [self updateValues];
 }
 
 - (void)updateValues {
+    NSLog(@"starting updateValues ");
+    
     //Getting bill amount from screen
     float billAmount = [self.billTextFeild.text floatValue];
-    
+    NSLog(@"billAmount is %f", billAmount);
     NSArray *tipValues = @[@(0.1), @(0.15), @(0.2)];
     
     //Getting tipControl setting from screen
@@ -77,13 +95,9 @@
     self.tipLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
     self.totalLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
     self.perPerson.text = [NSString stringWithFormat:@"$%0.2f", eachPersonTotal];
+    NSLog(@"Grand Total: %f", totalAmount);
+    NSLog(@"ending updateValues");
 }
-
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    self.tipLabel.text = self.billTextFeild.text;
-//    return YES;
-//}
 
 - (void)onSettingsButton {
     [self.navigationController pushViewController:[[SettingsViewController alloc] init] animated:YES];
@@ -114,7 +128,7 @@
 - (IBAction)sliderMoved:(UISlider *)slider
 {
     //Get the slider value from screen. Run update values.
-    NSLog(@"The value of the slider is %i", (int) slider.value);
+//    NSLog(@"The value of the slider is %i", (int) slider.value);
     self.numOfPeople.text = [NSString stringWithFormat:@"%i", (int) slider.value];
     [self updateValues];
     
