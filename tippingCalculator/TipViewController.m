@@ -86,7 +86,7 @@
     
     //Getting bill amount from screen
     float billAmount = [self.billTextFeild.text floatValue];
-    NSArray *tipValues = @[@(0.1), @(0.12), @(0.14), @(0.16), @(0.18), @(0.2)];
+    NSArray *tipValues = @[@(0.1), @(0.13), @(0.15), @(0.17), @(0.2)];
     
     //Getting tipControl setting from screen
     float tipPercent = [tipValues[self.tipControl.selectedSegmentIndex] floatValue];
@@ -130,22 +130,20 @@
     //NSArray *taxRateFields = @[@"taxRateField", @"taxRateLabel", @"percentSymbol"];
     int defaultTaxSetting = [svc getTaxSegmentIndex];
     if(defaultTaxSetting == 0) {
-        self.taxRateField.alpha = 1;
-        self.taxRateLabel.alpha = 1;
-        self.taxLabel.alpha = 1;
-        self.taxAmountLabel.alpha = 1;
-        self.percentSymbol.alpha = 1;
-    } else {
         self.taxRateField.alpha = 0;
         self.taxRateLabel.alpha = 0;
         self.taxLabel.alpha = 0;
         self.taxAmountLabel.alpha = 0;
         self.percentSymbol.alpha = 0;
+    } else {
+        self.taxRateField.alpha = 1;
+        self.taxRateLabel.alpha = 1;
+        self.taxLabel.alpha = 1;
+        self.taxAmountLabel.alpha = 1;
+        self.percentSymbol.alpha = 1;
     }
 }
 
-//This logic is used in SettingsViewController as well. Need to learn how to
-//create a helper method that all viewControllers can call
 - (void)setSegementControl {
     
     //Pull tip amount from defaults and converts to a segement index.

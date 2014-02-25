@@ -44,8 +44,8 @@
 											 selector:@selector(showFullScreenAd:)
 												 name:TJC_FULL_SCREEN_AD_RESPONSE_NOTIFICATION
 											   object:nil];
-    
-//    [Tapjoy getFullScreenAd];
+    //Show Tapjoy video ads
+    [Tapjoy getFullScreenAd];
     
     //sets the segement index to the current default
     self.defaultTipControl.selectedSegmentIndex = [self getTipSegmentIndex];
@@ -62,11 +62,11 @@
 
 
 - (void)saveDefaults {
-    NSArray *defaultTipValues = @[@(0.1), @(0.12), @(0.14), @(0.16), @(0.18), @(0.2)];
+    NSArray *defaultTipValues = @[@(0.1), @(0.13), @(0.15), @(0.17), @(0.2)];
     float defaultTipPercent = [defaultTipValues[self.defaultTipControl.selectedSegmentIndex] floatValue];
     int defaultTaxSetting = self.defaultTaxControl.selectedSegmentIndex;
     float defaultTaxRate = [self.taxRateLabel.text floatValue];
-    
+//    
     //Used twice. Should DRY this up by making an instance variable
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setFloat: defaultTipPercent forKey:@"defaultTipAmount"];
@@ -87,16 +87,14 @@
     //Also should research a case statement or something better
     if(defaultTipAmount < 0.11) {
         return 0;
-    } else if(defaultTipAmount < 0.13) {
+    } else if(defaultTipAmount < 0.14) {
         return 1;
-    } else if(defaultTipAmount < 0.15) {
+    } else if(defaultTipAmount < 0.16) {
         return 2;
-    } else if(defaultTipAmount < 0.17) {
+    } else if(defaultTipAmount < 0.18) {
         return 3;
-    } else if(defaultTipAmount < 0.19) {
-        return 4;
     } else {
-        return 5;
+        return 4;
     }
 }
 

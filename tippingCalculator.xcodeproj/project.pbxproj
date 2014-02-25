@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC43C5EE18BB05DC00C03A89 /* tip-calc-icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = AC43C5ED18BB05DC00C03A89 /* tip-calc-icon-120.png */; };
+		AC43C5F118BB069000C03A89 /* tip-calc-icon-58.png in Resources */ = {isa = PBXBuildFile; fileRef = AC43C5EF18BB069000C03A89 /* tip-calc-icon-58.png */; };
+		AC43C5F218BB069000C03A89 /* tip-calc-icon-80.png in Resources */ = {isa = PBXBuildFile; fileRef = AC43C5F018BB069000C03A89 /* tip-calc-icon-80.png */; };
+		AC43C5FA18BB0C3B00C03A89 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AC43C5F918BB0C3B00C03A89 /* Default.png */; };
+		AC43C5FE18BB1E1900C03A89 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC43C5FC18BB1E1900C03A89 /* Default@2x.png */; };
+		AC5C284018BC633D009FBEEF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC5C283F18BC633D009FBEEF /* Default-568h@2x.png */; };
 		AC9EB98318B5CE8B00A66DAA /* TipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC9EB97D18B5CE8B00A66DAA /* TipViewController.xib */; };
 		AC9EB98418B5CE8B00A66DAA /* TipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9EB97E18B5CE8B00A66DAA /* TipViewController.m */; };
 		AC9EB98518B5CE8B00A66DAA /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC9EB97F18B5CE8B00A66DAA /* SettingsViewController.xib */; };
@@ -59,6 +65,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC43C5ED18BB05DC00C03A89 /* tip-calc-icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tip-calc-icon-120.png"; sourceTree = "<group>"; };
+		AC43C5EF18BB069000C03A89 /* tip-calc-icon-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tip-calc-icon-58.png"; sourceTree = "<group>"; };
+		AC43C5F018BB069000C03A89 /* tip-calc-icon-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tip-calc-icon-80.png"; sourceTree = "<group>"; };
+		AC43C5F918BB0C3B00C03A89 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		AC43C5FC18BB1E1900C03A89 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		AC5C283F18BC633D009FBEEF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		AC9EB97D18B5CE8B00A66DAA /* TipViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipViewController.xib; sourceTree = "<group>"; };
 		AC9EB97E18B5CE8B00A66DAA /* TipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipViewController.m; sourceTree = "<group>"; };
 		AC9EB97F18B5CE8B00A66DAA /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -150,6 +162,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC43C5EC18BB05DC00C03A89 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				AC43C5FC18BB1E1900C03A89 /* Default@2x.png */,
+				AC5C283F18BC633D009FBEEF /* Default-568h@2x.png */,
+				AC43C5F918BB0C3B00C03A89 /* Default.png */,
+				AC43C5EF18BB069000C03A89 /* tip-calc-icon-58.png */,
+				AC43C5F018BB069000C03A89 /* tip-calc-icon-80.png */,
+				AC43C5ED18BB05DC00C03A89 /* tip-calc-icon-120.png */,
+			);
+			name = images;
+			path = tippingCalculator/images;
+			sourceTree = "<group>";
+		};
 		AC9EB9E318B5DBC700A66DAA /* Tapjoy.embeddedframework */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +196,7 @@
 		ACA36D8B18B454E0008C97B9 = {
 			isa = PBXGroup;
 			children = (
+				AC43C5EC18BB05DC00C03A89 /* images */,
 				AC9EB9E318B5DBC700A66DAA /* Tapjoy.embeddedframework */,
 				ACA36D9D18B454E0008C97B9 /* tippingCalculator */,
 				ACA36DB618B454E1008C97B9 /* tippingCalculatorTests */,
@@ -312,6 +339,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "David Ladowitz";
 				TargetAttributes = {
+					ACA36D9318B454E0008C97B9 = {
+						DevelopmentTeam = Y36G35L9AQ;
+					};
 					ACA36DAE18B454E1008C97B9 = {
 						TestTargetID = ACA36D9318B454E0008C97B9;
 					};
@@ -342,10 +372,16 @@
 			files = (
 				ACA36DA218B454E0008C97B9 /* InfoPlist.strings in Resources */,
 				AC9EB98D18B5CF6F00A66DAA /* bar.jpg in Resources */,
+				AC43C5F118BB069000C03A89 /* tip-calc-icon-58.png in Resources */,
 				ACA36DAA18B454E0008C97B9 /* Images.xcassets in Resources */,
+				AC43C5EE18BB05DC00C03A89 /* tip-calc-icon-120.png in Resources */,
 				AC9EB98518B5CE8B00A66DAA /* SettingsViewController.xib in Resources */,
+				AC43C5FA18BB0C3B00C03A89 /* Default.png in Resources */,
 				AC9EB98E18B5CF6F00A66DAA /* drink.jpg in Resources */,
+				AC43C5F218BB069000C03A89 /* tip-calc-icon-80.png in Resources */,
+				AC5C284018BC633D009FBEEF /* Default-568h@2x.png in Resources */,
 				AC9EB98318B5CE8B00A66DAA /* TipViewController.xib in Resources */,
+				AC43C5FE18BB1E1900C03A89 /* Default@2x.png in Resources */,
 				AC9EB9E718B5DBC700A66DAA /* TapjoyResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -485,8 +521,11 @@
 		ACA36DC118B454E1008C97B9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/dladowitz/Documents/repos/IOS/tippingCalculator/Tapjoy.embeddedframework,
@@ -496,6 +535,8 @@
 				INFOPLIST_FILE = "tippingCalculator/tippingCalculator-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6206E698-8F5F-4A24-B238-E3B83D427D41";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -503,8 +544,11 @@
 		ACA36DC218B454E1008C97B9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/dladowitz/Documents/repos/IOS/tippingCalculator/Tapjoy.embeddedframework,
@@ -514,6 +558,8 @@
 				INFOPLIST_FILE = "tippingCalculator/tippingCalculator-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6206E698-8F5F-4A24-B238-E3B83D427D41";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
